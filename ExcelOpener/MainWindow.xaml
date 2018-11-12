@@ -5,8 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExcelOpener"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Excel Loader" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18*"/>
+            <RowDefinition Height="401*"/>
+        </Grid.RowDefinitions>
+        <TextBox x:Name="FilePathTextBox" Height="23" Margin="10,10,170,0" TextWrapping="Wrap" Text="path/to/file.xlsx" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Button x:Name="BrowseButton" Content="Browse" Margin="0,10,90,0" Height="23" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="75"/>
+        <Button x:Name="LoadButton" Content="Load" Margin="0,10,10,0" VerticalAlignment="Top" Grid.RowSpan="2" HorizontalAlignment="Right" Width="75" Height="23" IsDefault="True"/>
+
     </Grid>
 </Window>
