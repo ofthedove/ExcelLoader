@@ -24,5 +24,25 @@ namespace ExcelOpener
         {
             InitializeComponent();
         }
+
+        private void BrowseButton_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog filePicker = new Microsoft.Win32.OpenFileDialog();
+
+            filePicker.DefaultExt = ".xlsx";
+            filePicker.Filter = "Excel File (*.xlsx)|*.xlsx";
+
+            Nullable<bool> filePicked = filePicker.ShowDialog();
+
+            if (filePicked == true)
+            {
+                FilePathTextBox.Text = filePicker.FileName;
+            }
+        }
+
+        private void LoadButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
