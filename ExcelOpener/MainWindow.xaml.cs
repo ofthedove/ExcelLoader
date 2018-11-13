@@ -31,10 +31,10 @@ namespace ExcelOpener
 
         private void RefreshSheetsList()
         {
-            Excel.Application app = new Excel.Application();
-
             try
             {
+                Excel.Application app = new Excel.Application();
+
                 Excel.Workbook wb = app.Workbooks.Open(FilePathTextBox.Text, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
@@ -82,24 +82,55 @@ namespace ExcelOpener
 
         private void LoadButton_Click(object sender, RoutedEventArgs e)
         {
-            Excel.Application app = new Excel.Application();
+            if (String.IsNullOrEmpty(SheetPickerComboBox.Text))
+            {
+                Console.WriteLine("No sheet name");
+                return;
+            }
 
             try
             {
+                Excel.Application app = new Excel.Application();
+
                 Excel.Workbook wb = app.Workbooks.Open(FilePathTextBox.Text, Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                         Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                         Type.Missing, Type.Missing);
 
-                foreach (Excel.Worksheet ws in wb.Worksheets)
-                {
-                    Console.WriteLine(ws.Name);
-                }
+                Excel.Worksheet sheet = (Excel.Worksheet)wb.Sheets[SheetPickerComboBox.Text];
+                Excel.Range excelRange = sheet.UsedRange;
+
+                Console.WriteLine(excelRange.Table().ToString());
             }
             catch (System.Runtime.InteropServices.COMException ex)
             {
                 Console.WriteLine("bad file path");
             }
+
+            
+
+
+
+            //foreach (Excel.Range row in excelRange.Rows)
+            //{
+            //    int rowNumber = row.Row;
+
+
+            //    string[] A4D4 = GetRange("A" + rowNumber + ":F" + rowNumber + "", sheet);
+
+            //}
+
+            //public string[] GetRange(string range, Worksheet excelWorksheet)
+            //{
+            //    Microsoft.Office.Interop.Excel.Range workingRangeCells =
+            //      excelWorksheet.get_Range(range, Type.Missing);
+            //    //workingRangeCells.Select();
+
+            //    System.Array array = (System.Array)workingRangeCells.Cells.Value2;
+            //    string[] arrayS = this.ConvertToStringArray(array);
+
+            //    return arrayS;
+            //}
         }
     }
 }
